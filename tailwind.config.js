@@ -1,8 +1,7 @@
-// tailwind.config.js
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -14,7 +13,10 @@ export default {
         headingColor: "#181A1E",
         textColor: "#4E545F",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
     },
   },
   plugins: [],
-}
+};
