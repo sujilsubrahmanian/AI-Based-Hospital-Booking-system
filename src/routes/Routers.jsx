@@ -5,7 +5,7 @@ import DoctorDetails from '../pages/Doctors/DoctorDetails'
 import Services     from '../pages/Services'
 import Contact      from '../pages/Contact'
 import Login        from '../pages/Login'
-//import Signup       from '../pages/Signup'
+import Signup       from '../pages/Signup'
 
   
       
@@ -19,7 +19,9 @@ const Routers = () => {
       <Route path='/doctors/:id' element={<DoctorDetails />} />
       <Route path='/services'  element={<Services />} />
       <Route path='/contact'  element={<Contact/>}/>
-      <Route path='Login'     element={<Login/>}/>
+      <Route path='/login'  element={<Login/>}/>
+      <Route path='/register' element={<Signup/>}/>
+     
       
      
 
