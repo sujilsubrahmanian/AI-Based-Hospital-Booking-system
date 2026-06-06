@@ -1,6 +1,4 @@
-// eslint-disable-next-line react-refresh/only-export-components
-import { createContext, useContext, useEffect, useState } from 'react'
-//import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,24 +7,14 @@ import {
 } from 'firebase/auth'
 import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { auth, db } from '../firebase'
+import AuthContext from './AuthContext'
 
-// 1. Create the context
-const AuthContext = createContext()
-
-// 2. Custom hook — any component can call useAuth() to get user info
-export const useAuth = () => useContext(AuthContext)
-
-// 3. Provider — wraps the whole app and provides auth state
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user,    setUser]    = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // Register a new user
   const register = async (email, password, name, phone) => {
-    // Create the auth account
     const result = await createUserWithEmailAndPassword(auth, email, password)
-
-    // Save extra user info (name, phone) to Firestore
     await setDoc(doc(db, 'users', result.user.uid), {
       uid:       result.user.uid,
       name,
@@ -36,28 +24,23 @@ export const AuthProvider = ({ children }) => {
       photo:     '',
       createdAt: new Date().toISOString(),
     })
-
     return result
   }
 
-  // Log in an existing user
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
-  // Log out
   const logout = () => {
     return signOut(auth)
   }
 
-  // Get full user data from Firestore (includes name, phone etc.)
   const getUserData = async (uid) => {
     const docRef  = doc(db, 'users', uid)
     const docSnap = await getDoc(docRef)
     return docSnap.exists() ? docSnap.data() : null
   }
 
-  // Listen for auth state changes (runs on every page load)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
@@ -68,8 +51,6 @@ export const AuthProvider = ({ children }) => {
       }
       setLoading(false)
     })
-
-    // Cleanup listener when component unmounts
     return () => unsubscribe()
   }, [])
 
@@ -81,3 +62,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   )
 }
+
+export default AuthProvider
