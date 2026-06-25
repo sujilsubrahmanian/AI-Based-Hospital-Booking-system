@@ -79,6 +79,15 @@ const Header = () => {
                   >
                     My Bookings
                   </Link>
+                  {user?.role === 'admin' && (
+                    <Link
+                     to="/admin"
+                     onClick={()=>setDropdownOpen(false)}
+                     className="block px-4 py-2 text-sm text-purple-600 font-medium hover:bg-purple-50"
+                     >
+                      Admin Dashboard
+                     </Link>
+                  )}
                   <hr className="my-1 border-gray-100" />
                   <button
                     onClick={handleLogout}
@@ -131,6 +140,9 @@ const Header = () => {
             <>
               <Link to="/user/profile"          onClick={() => setMenuOpen(false)} className="text-gray-700">My Profile</Link>
               <Link to="/user/profile/bookings" onClick={() => setMenuOpen(false)} className="text-gray-700">My Bookings</Link>
+              {user?.role === 'admin' && (
+                <Link to="/admin"                 onClick={() => setMenuOpen(false)} className="text-purple-600 font-medium">Admin Dashboard</Link>
+                )}
               <button onClick={handleLogout} className="text-left text-red-500">Logout</button>
             </>
           ) : (
