@@ -31,8 +31,11 @@ const DoctorDetails = () => {
           <div>
             <div className="bg-white rounded-2xl shadow-sm p-8">
               <div style={{display:'flex', gap:'1.5rem', alignItems:'flex-start'}}>
-                <div className="w-32 h-32 bg-blue-50 rounded-full flex items-center justify-center text-6xl flex-shrink-0">
-                  👨‍⚕️
+                <div className="w-32 h-32 bg-blue-50 rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                  <div className="text-gray-300">
+                    🖼️
+                    Image
+                  </div>
                 </div>
                 <div>
                   <span className="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">

@@ -54,7 +54,9 @@ const Doctors = () => {
             {filtered.map((doc) => (
               <div key={doc.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
                 <div className="w-full h-48 bg-blue-50 flex items-center justify-center text-6xl">
-                  👨‍⚕️
+                  <div className="w-20 h-20 rounded-full bg-blue-200 flex items-center justify-center text-white text-xl font-bold">
+                    {doc.name ? doc.name.charAt(4).toUpperCase() : 'U' }
+                    </div>
                 </div>
                 <div className="p-4">
                   <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
